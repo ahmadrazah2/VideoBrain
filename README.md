@@ -15,7 +15,9 @@
 
 ## 📺 Video Demo
 
-https://github.com/user-attachments/assets/4f11695b-de14-4e76-bc44-4f4272319d3e
+<p align="center">
+  <video src="https://github.com/user-attachments/assets/4f11695b-de14-4e76-bc44-4f4272319d3e" width="100%" controls></video>
+</p>
 
 ---
 
