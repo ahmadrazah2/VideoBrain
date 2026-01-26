@@ -15,7 +15,7 @@
 
 ## 📺 Video Demo
 
-<video src="chatbot.mov" width="100%" controls></video>
+(https://github.com/ahmadrazah2/VideoBrain/blob/main/chatbot.mov)
 
 ---
 
