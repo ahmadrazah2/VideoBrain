@@ -13,6 +13,12 @@
 
 ---
 
+## 📺 Video Demo
+
+https://github.com/ahmadrazah2/VideoBrain/raw/main/chatbot.mov
+
+---
+
 ## 🚀 What VideoBrain Does
 
 VideoBrain enables **deep understanding of videos** by combining **visual perception**, **audio transcription**, and **retrieval-augmented reasoning**.
