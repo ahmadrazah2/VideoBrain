@@ -1,0 +1,33 @@
+# Environment Variables
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Node.js
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Databases / Data
+chroma_db_video/
+temp_uploads/
+*.mp4
+*.mp3
+*.mov
+*.avi
+*.mkv
+
+# OS
+.DS_Store
+Thumbs.db
