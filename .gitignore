@@ -24,6 +24,7 @@ chroma_db_video/
 temp_uploads/
 *.mp4
 *.mp3
+*.mov
 *.avi
 *.mkv
 

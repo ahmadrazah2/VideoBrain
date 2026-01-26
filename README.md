@@ -15,7 +15,7 @@
 
 ## 📺 Video Demo
 
-(https://github.com/ahmadrazah2/VideoBrain/blob/main/chatbot.mov)
+[Add your demo video here! You can drag and drop a video file directly into this README while editing on GitHub.]
 
 ---
 
