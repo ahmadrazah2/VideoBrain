@@ -15,7 +15,7 @@
 
 ## 📺 Video Demo
 
-[Add your demo video here! You can drag and drop a video file directly into this README while editing on GitHub.]
+[https://github.com/user-attachments/assets/4f11695b-de14-4e76-bc44-4f4272319d3e]
 
 ---
 
