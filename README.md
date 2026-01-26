@@ -1,4 +1,10 @@
-# 🧠 VideoBrain
+![Multimodal](https://img.shields.io/badge/Capabilities-Multimodal-blue)
+![Vision Model](https://img.shields.io/badge/Vision%20Model-Qwen2.5--VL-orange)
+![RAG](https://img.shields.io/badge/Pipeline-RAG-green)
+![Agent](https://img.shields.io/badge/Agent-LangGraph-purple)
+![LLM](https://img.shields.io/badge/LLM-Llama%203.3-red)
+![Backend](https://img.shields.io/badge/Backend-FastAPI-009688)
+![Frontend](https://img.shields.io/badge/Frontend-React-61DAFB)
 
 ### **Multimodal RAG-Based Video Reasoning Agent**
 
@@ -65,7 +71,7 @@ graph TD
 
 ## 🛠️ Tech Stack
 
-* **Vision Model**: Qwen2.5-VL / Gemini 1.5 Flash
+* **Vision Model**: Qwen2.5-VL
 * **Speech Recognition**: OpenAI Whisper
 * **Reasoning LLM**: Llama-3.3-70B (via Groq API)
 * **Vector Database**: ChromaDB
