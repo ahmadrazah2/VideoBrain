@@ -1,11 +1,3 @@
-![Multimodal](https://img.shields.io/badge/Capabilities-Multimodal-blue)
-![Vision Model](https://img.shields.io/badge/Vision%20Model-Qwen2.5--VL-orange)
-![RAG](https://img.shields.io/badge/Pipeline-RAG-green)
-![Agent](https://img.shields.io/badge/Agent-LangGraph-purple)
-![LLM](https://img.shields.io/badge/LLM-Llama%203.3-red)
-![Backend](https://img.shields.io/badge/Backend-FastAPI-009688)
-![Frontend](https://img.shields.io/badge/Frontend-React-61DAFB)
-
 ### **Multimodal RAG-Based Video Reasoning Agent**
 
 > Upload Zoom or YouTube videos and chat with them.
@@ -39,41 +31,26 @@ Instead of keyword search, it lets you **ask natural questions** and get answers
 
 ---
 
-## 🤖 System Pipeline
-
-### 1. Visual Understanding
-* Video frames sampled every few seconds
-* Vision-language model generates detailed scene and action descriptions
-
-### 2. Audio Understanding
-* Audio extracted using FFmpeg
-* Speech transcribed with timestamps using Whisper
-
-### 3. Multimodal RAG Memory
-* Visual descriptions and transcripts embedded into a shared vector space
-* Stored in ChromaDB for semantic retrieval
-
-### 4. Reasoning Agent
-* User queries trigger RAG retrieval
-* Large language model synthesizes multimodal evidence into a single answer
-
----
-
 ## 🏗️ Architecture Overview
 
-```mermaid
-graph TD
-    A[Video Upload] --> B[Audio Extraction]
-    A --> C[Frame Sampling]
-    B --> D[Speech Transcription]
-    C --> E[Vision-Language Model]
-    D --> F[Embedding Model]
-    E --> F
-    F --> G[(ChromaDB)]
-    H[User Query] --> I[LLM Reasoning Agent]
-    G --> I
-    I --> J[Grounded Answer]
-```
+The project is divided into two main components: a **FastAPI backend** and a **React frontend**.
+
+### Backend
+
+The backend is responsible for processing the videos, storing the data, and handling the chat logic.
+
+*   **`main.py`**: The main entry point of the backend application. It defines the FastAPI server and the API endpoints for video upload and chat.
+*   **`core/video_processor.py`**: This file contains the core logic for processing videos. It extracts audio, transcribes it using Whisper, generates visual descriptions using a vision LLM, and stores the multimodal data in ChromaDB.
+*   **`core/agent.py`**: This file defines the AI agent that answers user questions. It uses LangGraph to create a stateful agent that can retrieve documents from ChromaDB, grade their relevance, rewrite queries, and generate answers using a large language model.
+
+### Frontend
+
+The frontend provides the user interface for uploading videos and interacting with the AI agent.
+
+*   **`App.jsx`**: The main component of the frontend application. It manages the overall layout and state of the UI.
+*   **`components/VideoUploader.jsx`**: This component handles the video upload process, sending the video to the backend's `/upload` endpoint.
+*   **`components/ChatInterface.jsx`**: This component provides the chat interface, sending user messages to the backend's `/chat` endpoint and displaying the conversation.
+*   **`components/Sidebar.jsx`**: This component displays the list of uploaded videos and allows the user to switch between them.
 
 ---
 
@@ -95,21 +72,20 @@ graph TD
 ### 1. Prerequisites
 * **FFmpeg** installed on your system.
 * **Conda** for environment management.
-* API Keys for: **Groq**, **HuggingFace**, and **Google Gemini** (stored in `.env`).
+* API Keys for: **OpenAI** (for Whisper).
 
-### 2. Setup Environment
+### 2. Setup Backend
 ```bash
+cd backend
 conda create -n video_brain python=3.10
 conda activate video_brain
 pip install -r requirements.txt
 ```
 
 ### 3. Configure Environment Variables
-Create a `.env` file in the root directory:
+Create a `.env` file in the `backend` directory:
 ```env
-GROQ_API_KEY=your_key
-HF_TOKEN=your_token
-GOOGLE_API_KEY=your_key
+OPENAI_API_KEY="your-openai-api-key"
 ```
 
 ### 4. Run the Backend
@@ -119,7 +95,7 @@ python main.py
 ```
 *API will be available at `http://localhost:8000`*
 
-### 5. Run the Frontend
+### 5. Setup and Run the Frontend
 ```bash
 cd frontend
 npm install

@@ -18,17 +18,17 @@ const Sidebar = ({ videos, activeVideoId, onVideoSelect, onNewChat }) => {
                         className={`video-item ${activeVideoId === video.id ? 'active' : ''}`}
                         onClick={() => onVideoSelect(video.id)}
                     >
-                        <div style={{ width: 32, height: 32, borderRadius: '4px', overflow: 'hidden', background: '#000', flexShrink: 0 }}>
+                        <div className="video-thumbnail-container">
                             <video
                                 src={`http://localhost:8000/videos/${encodeURIComponent(video.filename)}#t=1`}
-                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                className="video-thumbnail"
                             />
                         </div>
                         <span className="video-item-title" title={video.filename}>{video.filename}</span>
                     </div>
                 ))}
                 {videos.length === 0 && (
-                    <p className="text-muted" style={{ padding: '1rem', fontSize: '0.875rem' }}>
+                    <p className="no-videos-text">
                         No videos uploaded yet.
                     </p>
                 )}

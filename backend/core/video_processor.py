@@ -30,25 +30,22 @@ if conda_bin not in os.environ["PATH"]:
 # --- Configuration & Initialization ---
 
 # 1. Vision LLM
-# 1. Vision Client (Hugging Face OpenAI-compatible router)
-hf_vision_client = OpenAI(
-    base_url="https://router.huggingface.co/v1",
-    api_key=os.getenv("HF_TOKEN"),
-)
+# Vision Client (OpenAI-compatible)
+openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # 2. Embedding Model
 embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
 # 3. Vector Database
-db_client = chromadb.PersistentClient(path="./chroma_db_video")
+db_client = chromadb.PersistentClient(path=os.getenv("CHROMA_DB_PATH", "chroma_db_video"))
 video_collection = db_client.get_or_create_collection(
-    name="video_multimodal_collection",
+    name=os.getenv("CHROMA_DB_COLLECTION", "video_collection"),
     metadata={"hnsw:space": "cosine"}
 )
 
 # 4. Whisper Model (Lazy loaded)
 whisper_model = None
-FRAME_SAMPLE_RATE = 10  # seconds
+FRAME_SAMPLE_RATE = int(os.getenv("FRAME_SAMPLE_RATE", 10))
 
 
 # --- Helper Functions ---
@@ -114,8 +111,8 @@ def get_visual_descriptions(video_path: str) -> List[Dict[str, Any]]:
         _, buffer = cv2.imencode('.jpeg', frame)
         img_base64 = base64.b64encode(buffer).decode('utf-8')
         
-        response = hf_vision_client.chat.completions.create(
-            model="Qwen/Qwen2.5-VL-7B-Instruct:hyperbolic",
+        response = openai_client.chat.completions.create(
+            model="gpt-4-vision-preview",
             messages=[
                 {
                     "role": "user",

@@ -47,38 +47,33 @@ const ChatInterface = ({ video }) => {
         }
     };
 
-    if (!video) return <div className="chat-container">Select a video to start.</div>;
+    if (!video) return <div className="chat-container empty">Select a video to start.</div>;
 
     return (
         <div className="chat-container">
             <div className="chat-header">
                 <div>
-                    <h3 style={{ margin: 0, fontSize: '1.1rem' }}>{video.filename}</h3>
+                    <h3>{video.filename}</h3>
                     <small className="text-muted">ID: {videoId?.substring(0, 8)}...</small>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#10b981' }}></div>
-                    <span style={{ fontSize: '0.875rem', fontWeight: 500, color: '#10b981' }}>Active</span>
+                <div className="status-badge">
+                    <div className="status-dot"></div>
+                    <span>Active</span>
                 </div>
             </div>
 
-            <div className="video-player-container" style={{ padding: '1.5rem 2rem', borderBottom: '1px solid var(--border-color)', background: '#f8fafc', display: 'flex', justifyContent: 'center' }}>
+            <div className="video-player-container">
                 <video
                     src={`http://localhost:8000/videos/${encodeURIComponent(video.filename)}`}
                     controls
-                    style={{
-                        maxWidth: '480px',
-                        width: '100%',
-                        borderRadius: '0.75rem',
-                        backgroundColor: '#000',
-                        boxShadow: 'var(--shadow-sm)'
-                    }}
+                    className="video-player"
                 />
             </div>
 
             <div className="messages-area">
                 {messages.map((msg, idx) => (
                     <div key={idx} className={`message ${msg.role}`}>
+                        {msg.role === 'ai' ? <Bot className="avatar" /> : <User className="avatar" />}
                         <div className="content">
                             {msg.content}
                         </div>
@@ -86,6 +81,7 @@ const ChatInterface = ({ video }) => {
                 ))}
                 {loading && (
                     <div className="message ai">
+                        <Bot className="avatar" />
                         <div className="content typing-indicator">
                             <Loader2 size={16} className="spinner" />
                         </div>

@@ -46,60 +46,62 @@ const VideoUploader = ({ onVideoProcessed, onCancel }) => {
     };
 
     return (
-        <div className="uploader-overlay">
-            <h2><Upload className="icon" /> New Video Analysis</h2>
-            <p className="subtitle">Upload a video to start a new AI-powered conversation.</p>
+        <div className="uploader-container">
+            <div className="uploader-content">
+                <h2><Upload className="icon" /> New Video Analysis</h2>
+                <p className="subtitle">Upload a video to start a new AI-powered conversation.</p>
 
-            <div className="drop-zone">
-                <input
-                    type="file"
-                    accept="video/*"
-                    onChange={handleFileChange}
-                    id="file-input"
-                    className="file-input"
-                />
-                <label htmlFor="file-input" className="file-label" style={{ padding: file ? '1rem' : '4rem 2rem' }}>
-                    {file ? (
-                        <div className="file-selected" style={{ width: '100%' }}>
-                            {previewUrl && (
-                                <video
-                                    src={previewUrl}
-                                    style={{ width: '100%', maxHeight: '200px', borderRadius: '0.5rem', marginBottom: '1rem' }}
-                                />
-                            )}
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
-                                <FileVideo size={20} className="file-icon" />
-                                <span style={{ fontWeight: 600 }}>{file.name}</span>
+                <div className="drop-zone">
+                    <input
+                        type="file"
+                        accept="video/*"
+                        onChange={handleFileChange}
+                        id="file-input"
+                        className="file-input"
+                    />
+                    <label htmlFor="file-input" className="file-label">
+                        {file ? (
+                            <div className="file-selected">
+                                {previewUrl && (
+                                    <video
+                                        src={previewUrl}
+                                        className="video-preview"
+                                    />
+                                )}
+                                <div className="file-info">
+                                    <FileVideo size={20} className="file-icon" />
+                                    <span className="file-name">{file.name}</span>
+                                </div>
                             </div>
-                        </div>
-                    ) : (
-                        <>
-                            <Upload size={48} />
-                            <span>Click or drag video here to upload</span>
-                        </>
+                        ) : (
+                            <>
+                                <Upload size={48} />
+                                <span>Click or drag video here to upload</span>
+                            </>
+                        )}
+                    </label>
+                </div>
+
+                {error && <p className="error-msg">{error}</p>}
+
+                <div className="action-buttons">
+                    {onCancel && (
+                        <button onClick={onCancel} className="secondary-btn">
+                            Cancel
+                        </button>
                     )}
-                </label>
-            </div>
-
-            {error && <p className="error-msg" style={{ color: '#ef4444', marginBottom: '1rem' }}>{error}</p>}
-
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-                {onCancel && (
-                    <button onClick={onCancel} className="secondary-btn" style={{ padding: '0.75rem 1.5rem', borderRadius: '0.5rem', cursor: 'pointer', border: '1px solid #e2e8f0', background: 'white' }}>
-                        Cancel
+                    <button
+                        onClick={handleUpload}
+                        disabled={!file || uploading}
+                        className="primary-btn"
+                    >
+                        {uploading ? (
+                            <>
+                                <Loader2 className="spinner" /> Processing...
+                            </>
+                        ) : 'Start Analysis'}
                     </button>
-                )}
-                <button
-                    onClick={handleUpload}
-                    disabled={!file || uploading}
-                    className="primary-btn"
-                >
-                    {uploading ? (
-                        <>
-                            <Loader2 className="spinner" /> Processing...
-                        </>
-                    ) : 'Start Analysis'}
-                </button>
+                </div>
             </div>
         </div>
     );

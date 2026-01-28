@@ -1,0 +1,12 @@
+# Environment variables
+.env
+
+# ChromaDB data
+chroma_db_video/
+
+# Temporary uploaded files
+temp_uploads/
+
+# Python cache
+__pycache__/
+*.pyc
